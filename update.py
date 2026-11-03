@@ -1,4 +1,5 @@
 import copy
+import random
 
 def update(pixels):
     
@@ -38,33 +39,35 @@ def update(pixels):
                         newPixels[i][j].state = 'air'
                         newPixels[i][j + 1].state = 'water'
                     else:
+                        r = (random.randint(0,1)*2) - 1
                         if i != 0:
                             if i != cols - 1:
-                                if pixels[i + 1][j] == 'air':
-                                    newPixels[i][j] = 'air'
-                                    newPixels[i + 1][j] = 'water'
-                            elif i == cols - 1 or pixels[i + 1][j] != 'air':
-                                if pixels[i - 1][j] == 'air':
-                                    newPixels[i][j] = 'air'
-                                    newPixels[i - 1][j] = 'water'
+                                if pixels[i + r][j].state == 'air' and newPixels[i + r][j].state != 'water':
+                                    newPixels[i][j].state = 'air'
+                                    newPixels[i + r][j].state = 'water'
+                            elif i == cols - 1 or pixels[i + 1][j].state != 'air':
+                                if pixels[i - 1][j].state == 'air' and newPixels[i - 1][j].state != 'water':
+                                    newPixels[i][j].state = 'air'
+                                    newPixels[i - 1][j].state = 'water'
                         else:
-                            if pixels[i + 1][j] == 'air':
-                                newPixels[i][j] = 'air'
-                                newPixels[i + 1][j] = 'water'
+                            if pixels[i + 1][j].state == 'air' and newPixels[i + 1][j].state != 'water':
+                                newPixels[i][j].state = 'air'
+                                newPixels[i + 1][j].state = 'water'
                 else:
-                    if i != 0:
-                        if i != cols - 1:
-                            if pixels[i + 1][j] == 'air':
-                                newPixels[i][j] = 'air'
-                                newPixels[i + 1][j] = 'water'
-                        elif i == cols - 1 or pixels[i + 1][j] != 'air':
-                            if pixels[i - 1][j] == 'air':
-                                newPixels[i][j] = 'air'
-                                newPixels[i - 1][j] = 'water'
-                    else:
-                        if pixels[i + 1][j] == 'air':
-                            newPixels[i][j] = 'air'
-                            newPixels[i + 1][j] = 'water'            
+                        if i != 0:
+                            r = (random.randint(0,1)*2) - 1
+                            if i != cols - 1:
+                                if pixels[i + r][j].state == 'air' and newPixels[i + r][j].state != 'water':
+                                    newPixels[i][j].state = 'air'
+                                    newPixels[i + r][j].state = 'water'
+                            elif i == cols - 1 or pixels[i + 1][j].state != 'air':
+                                if pixels[i - 1][j].state == 'air' and newPixels[i - 1][j].state != 'water':
+                                    newPixels[i][j].state = 'air'
+                                    newPixels[i - 1][j].state = 'water'
+                        else:
+                            if pixels[i + 1][j].state == 'air' and newPixels[i + 1][j].state != 'water':
+                                newPixels[i][j].state = 'air'
+                                newPixels[i + 1][j].state = 'water'          
 
 
     return newPixels
